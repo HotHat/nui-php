@@ -29,7 +29,7 @@ class Application
     }
 
     public function make($abstract) {
-        return $this->container[$abstract];
+        return $this->container->get($abstract);
     }
 
     public function bindBasePath(): void {

@@ -1,27 +1,30 @@
 <?php declare(strict_types=1);
 
 use App\HttpKernel;
+use Niu\Application;
 use Niu\Container;
 
-require '../boostrap/autoload.php';
+require __DIR__ . '/../boostrap/autoload.php';
+$app = require_once __DIR__ . '/../boostrap/app.php';
 
-$container = new Container();
+// $app = new Application(__DIR__ . '/..');
+//
+// $contain = $app->container();
+//
+// $contain['http.kernel'] = function() {
+//     return new HttpKernel();
+// };
 
-$pimple['service'] = $container->factory(function () {
-    return new \Niu\Request();
-});
 
-$pimple['same_service'] = new \Niu\Request();
+$kernel = $app->make('http.kernel');
 
-// print_r($instance);
-$s1 = $pimple['service'];
-$s2 = $pimple['service'];
 
-var_dump($s2 === $s1);
+var_dump($kernel instanceof HttpKernel);
+var_dump($kernel instanceof \Niu\Kernel);
+// $resp = $kernel->handle(new \Niu\Request());
 
-$p1 = $pimple['same_service'];
-$p2 = $pimple['same_service'];
+// echo $resp;
+// echo '2222';
 
-var_dump($p2 === $p1);
 
 

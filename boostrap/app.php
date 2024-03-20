@@ -8,7 +8,11 @@ $app = new Application(__DIR__ . '/..');
 
 $contain = $app->container();
 
-$contain['http.kernel'] = new HttpKernel();
+$contain['http.kernel'] = function() {
+    return new HttpKernel();
+};
+
+
 
 
 return $app;

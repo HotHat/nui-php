@@ -4,9 +4,9 @@ namespace App;
 
 class Response
 {
-    private $_status;
-    private $_header;
-    private $_body = '';
+    private int $_status;
+    private array $_header;
+    private string $_body = '';
 
     public function __construct(
         $status = 200,
@@ -18,7 +18,8 @@ class Response
         $this->_body = (string)$body;
     }
 
-    public function header($name, $value) {
+    public function header($name, $value): static
+    {
         $this->_header[$name] = $value;
         return $this;
     }

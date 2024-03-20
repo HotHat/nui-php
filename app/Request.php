@@ -28,4 +28,19 @@ class Request
         return $_POST;
     }
 
+    public function header($key, $default='') {
+        $exist = $_SERVER[strtoupper('http_'. $key)] ?? null;
+        return $exist ?? $default;
+    }
+
+    public function bearerToken(): string {
+        $header = $this->header('Authorization', '');
+
+        if (str_starts_with($header, 'Bearer ')) {
+            return substr($header, 7);
+        }
+        return '';
+    }
+
+
 }

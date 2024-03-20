@@ -99,7 +99,7 @@ class Kernel
 
     }
 
-    public function handle(Request $request): Response {
+    public function handle(Request $request): Response | string {
         $uri = $request->getUri();
         $match = null;
         foreach ($this->routes as $route) {
@@ -122,7 +122,7 @@ class Kernel
         foreach ($match['middleware'] as $md) {
             $g = $this->middlewareGroup[$md] ?? null;
             if ($g) {
-                $mds += $g;
+                $mds = array_merge($mds, $g);
             } else {
                 $g = $this->middleware[$md] ?? null;
                 if ($g) {

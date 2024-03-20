@@ -11,7 +11,7 @@ class Application extends Kernel
     public function routeProvider(): void
     {
         $router = new Router();
-        $router->post('/login', [LoginController::class, 'submit']);
+        $router->post('/admin/login', [LoginController::class, 'login']);
 
         $router->group([
             'middleware' => ['admin'],

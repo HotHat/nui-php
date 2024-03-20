@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use App\Auth;
-use App\Request;
 use Closure;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Niu\Request;
 
 class Authenticate
 {

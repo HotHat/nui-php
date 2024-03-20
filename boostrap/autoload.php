@@ -5,7 +5,8 @@
 $autoload = [
     'classmap' => [
         "App\\" => "app/",
-        "Firebase\\JWT\\" => 'third_party/JWT/'
+        "Firebase\\JWT\\" => 'third_party/JWT/',
+        "Niu\\" => 'framework/',
     ],
     'files' => [
         'boostrap/helpers.php'
@@ -30,9 +31,12 @@ spl_autoload_register(function ($class) use ($autoload) {
             $path = __DIR__ . '/../' . $class . '.php';
             if (file_exists($path)) {
                 require $path;
+                // dump('require ' . $path);
             } else {
                 die('can\'t find php file:' . $path);
             }
         }
     }
 });
+
+

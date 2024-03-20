@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database;
+namespace Niu\Database;
 
 class SqliteDB {
     const KEY = 'Noreh282oE';

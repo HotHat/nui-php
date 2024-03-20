@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Request;
 use Closure;
+use Niu\Request;
 
 class SessionStart
 {

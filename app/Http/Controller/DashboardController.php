@@ -3,9 +3,7 @@
 namespace App\Http\Controller;
 
 use App\Auth;
-use App\Request;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+use Niu\Request;
 
 class DashboardController
 {

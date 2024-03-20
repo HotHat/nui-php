@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Niu\InstanceTrait;
+
 class Auth
 {
     use InstanceTrait;

@@ -5,7 +5,7 @@
  * Time: 2:19 PM
  */
 
-namespace App;
+namespace Niu;
 
 trait InstanceTrait
 {

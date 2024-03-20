@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use Niu\Config;
+
 function assetUrl() {
     return '/assets/';
 }
@@ -21,7 +23,7 @@ function dump($var) {
 }
 
 function config($cfg) {
-    return \App\Config::load($cfg);
+    return Config::load($cfg);
 }
 
 function redirect($url) {
@@ -29,16 +31,6 @@ function redirect($url) {
     die();
 }
 
-function session($key, $value=null) {
-    if (!$value) {
-        return $_SESSION[$key] ?? null;
-    }
-    $_SESSION[$key] = $value;
-}
-
-function sessionFlush() {
-    session_unset();
-}
 
 function respJson($data) {
     header('Content-Type: application/json');
@@ -60,14 +52,6 @@ function respFail($message, $data=[], $code=0) {
     ]);
 }
 
-function authLogin($user) {
-    session_regenerate_id();
-    session('auth_user', $user);
-}
-
-function auth_user() {
-    return session('auth_user');
-}
 
 function hashMake($password) {
     return password_hash($password, PASSWORD_BCRYPT, [

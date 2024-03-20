@@ -6,7 +6,7 @@ use Firebase\JWT\Key;
 require '../boostrap/autoload.php';
 
 
-$cfg = config('app');
+$cfg = config('jwt');
 $payload = [
     'iat' => strtotime('2024-03-20 01:30:00'),
     'exp' => strtotime('2024-03-20 10:30:00'),

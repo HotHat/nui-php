@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 
-require "../boostrap/autoload.php";
+use Niu\Request;
 
-use App\Application;
-use App\Request;
+require  __DIR__ . "/../boostrap/autoload.php";
+
+$app = require_once __DIR__ . "/../boostrap/app.php";
 
 
-$app = new Application();
+$kernel = $app->make('http.kernel');
+
 $response = $app->handle(new Request());
 
 echo $response;

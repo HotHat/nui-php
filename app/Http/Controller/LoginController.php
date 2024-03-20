@@ -2,9 +2,8 @@
 
 namespace App\Http\Controller;
 
-use App\Request;
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+use Niu\Request;
 
 class LoginController
 {

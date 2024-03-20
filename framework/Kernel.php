@@ -1,25 +1,11 @@
 <?php
-namespace App;
-
-use App\Http\Middleware\Authenticate;
-use App\Http\Middleware\SessionStart;
-use Throwable;
+namespace Niu;
 
 class Kernel
 {
-    protected array $middleware = [
-        SessionStart::class
-    ];
-    protected array $middlewareGroup = [
-        'admin' => [
-            Authenticate::class
-        ],
-        'api' => [
-        ]
-    ];
-    protected array $routeMiddleware = [
-
-    ];
+    protected array $middleware = [];
+    protected array $middlewareGroup = [];
+    protected array $routeMiddleware = [];
 
     protected array $routes = [];
 
@@ -41,13 +27,13 @@ class Kernel
             throw new \ErrorException($errStr, $errno, 1, $errFile, $errLine);
         });
 
-        set_exception_handler(function (Throwable $exp) {
-            file_put_contents(
-                __DIR__ . '/../Storage/error.log',
-                sprintf("%s: %s\n", date('Y-m-d H:i:s'), $exp->__toString()),
-                FILE_APPEND
-            );
-        });
+        // set_exception_handler(function (Throwable $exp) {
+        //     file_put_contents(
+        //         __DIR__ . '/../Storage/error.log',
+        //         sprintf("%s: %s\n", date('Y-m-d H:i:s'), $exp->__toString()),
+        //         FILE_APPEND
+        //     );
+        // });
     }
 
     protected function routeDispatch($action): \Closure

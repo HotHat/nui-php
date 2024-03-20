@@ -72,7 +72,7 @@ class PdoDB {
     }
 
     public function lastError(): string {
-        return $this->db->errorCode() . ': ' . $this->db->errorInfo();
+        return $this->db->errorCode() . ': ' . implode(';', $this->db->errorInfo());
     }
 
     public function beginTransaction(): bool {

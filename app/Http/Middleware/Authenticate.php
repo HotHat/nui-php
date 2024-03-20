@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Http\Middleware;
 
-use Closure;
 use App\Request;
-use App\Response;
+use Closure;
 
 class Authenticate
 {

@@ -1,9 +1,6 @@
 <?php
 
-namespace App\Controller;
-
-use App\Database\DB;
-use App\Response;
+namespace App\Http\Controller;
 
 class LoginController
 {

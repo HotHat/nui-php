@@ -1,24 +1,16 @@
 <?php
 
-namespace App\Controller;
+namespace App\Http\Controller;
 
 use App\Database\DB;
 
 class SettingController
 {
-    public function __construct()
-    {
-        checkLogin();
-    }
-
     public function index() {
-        return renderString('admin/setting.php');
     }
 
     public function all() {
-        return respSuccess([
-            "timeLocation" => "Asia/Shanghai"
-        ]);
+
     }
 
     public function update() {

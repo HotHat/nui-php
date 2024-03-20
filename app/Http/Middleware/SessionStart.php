@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Http\Middleware;
 
-use Closure;
 use App\Request;
-use App\Response;
+use Closure;
 
 class SessionStart
 {
     public function handle(Request $request, Closure $next)
     {
-        session_start();
+        // session_start();
         return $next($request);
         // 模板环境变量
         // TemplateRender::add('request_uri', $request->uri());

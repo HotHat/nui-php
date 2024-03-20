@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-require "../app/autoload.php";
+require "../boostrap/autoload.php";
 
 use App\Application;
 use App\Request;

@@ -1,13 +1,8 @@
 <?php
 namespace App;
 
-use App\Middleware\Authenticate;
-use App\Middleware\SessionStart;
-use App\Response;
-use App\Controller\DashboardController;
-use App\Controller\LoginController;
-use App\Controller\SettingController;
-use App\Controller\UserController;
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\SessionStart;
 use Throwable;
 
 class Kernel
@@ -26,7 +21,7 @@ class Kernel
 
     ];
 
-    protected $routes = [];
+    protected array $routes = [];
 
     public function __construct()
     {
@@ -104,7 +99,7 @@ class Kernel
 
     }
 
-    public function handle($request): Response {
+    public function handle(Request $request): Response {
         $uri = $request->getUri();
         $match = null;
         foreach ($this->routes as $route) {
@@ -115,6 +110,11 @@ class Kernel
 
         if (!$match) {
             return new Response(404);
+        }
+
+        $method = $request->getMethod();
+        if ($method !== $match['method']) {
+            return new Response(400, [], 'request method not support!');
         }
 
         $mds = $this->middleware;
@@ -131,7 +131,8 @@ class Kernel
             }
         }
 
-        $dispatch = $this->pipe($match['action'], array_reverse($mds));
+        $action = $this->makeAction($match['action']);
+        $dispatch = $this->pipe($action, array_reverse($mds));
 
         return $dispatch($request);
     }

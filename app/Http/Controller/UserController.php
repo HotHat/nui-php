@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Http\Controller;
 
 use App\Database\DB;
+use function App\Controller\checkLogin;
+use function App\Controller\render;
 
 class UserController
 {

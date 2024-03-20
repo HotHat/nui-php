@@ -10,6 +10,10 @@ class Request
         return $parseUri['path'];
     }
 
+    public function getMethod() {
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
     public function get($key=null) {
         if ($key) {
             return $_GET[$key] ?? '';

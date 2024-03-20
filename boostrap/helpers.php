@@ -16,6 +16,10 @@ function dd($var) {
     die();
 }
 
+function dump($var) {
+    var_dump($var);
+}
+
 function config($cfg) {
     return \App\Config::load($cfg);
 }

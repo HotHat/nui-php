@@ -9,9 +9,6 @@ class LoginController
 {
     public function login(Request $request): bool|string
     {
-        $username = $request->post('username');
-        $password = $request->post('password');
-
         $cfg = config('jwt');
         $payload = [
             'iat' => time(),
@@ -23,14 +20,6 @@ class LoginController
         return respSuccess([
             'token' => $jwt
         ]);
-    }
-
-    public function submit($request) {
-
-        // session login
-        // authLogin(['id' => 1, 'name' => 'admin']);
-
-        return respSuccess();
     }
 
     public function logout() {

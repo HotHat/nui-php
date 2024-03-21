@@ -18,8 +18,11 @@ class Application
         self::$instance = $this;
     }
 
-    public function getInstance(): Application|static
+    public static function getInstance(): Application|static
     {
+        if (!self::$instance) {
+            throw new \Exception('need initialize Application::class first');
+        }
         return self::$instance;
     }
 

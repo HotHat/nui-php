@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
 
-use Niu\Application;
+use App\Exception\Handler;
 use App\HttpKernel;
+use Niu\Application;
 
-$app = new Application(__DIR__ . '/..');
+$app = new Application(realpath(__DIR__ . '/..'));
 
 $contain = $app->container();
 
@@ -12,7 +13,9 @@ $contain['http.kernel'] = function() {
     return new HttpKernel();
 };
 
-
+$contain['http.exception'] = function() {
+    return new Handler();
+};
 
 
 return $app;

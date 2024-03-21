@@ -1,24 +1,21 @@
 <?php declare(strict_types=1);
 
+use JetBrains\PhpStorm\NoReturn;
 use Niu\Config;
 
-function assetUrl() {
-    return '/assets/';
-}
-function baseUrl() {
-    return '/';
+function appPath() {
+   return \Niu\Application::getInstance()->container()->get('path.app');
 }
 
-function storagePath() {
-   return __DIR__ . '/../Storage/';
-}
 
-function dd($var) {
+#[NoReturn]
+function dd($var): void
+{
     var_dump($var);
     die();
 }
 
-function dump($var) {
+function dump($var): void {
     var_dump($var);
 }
 
@@ -26,18 +23,21 @@ function config($cfg) {
     return Config::load($cfg);
 }
 
-function redirect($url) {
+#[NoReturn]
+function redirect($url): void {
     header("Location: " . $url);
     die();
 }
 
 
-function respJson($data) {
+function respJson($data): bool|string
+{
     header('Content-Type: application/json');
     return json_encode($data);
 }
 
-function respSuccess($data=null, $isArray=false) {
+function respSuccess($data=null, $isArray=false): bool|string
+{
    return respJson([
        'code' => 200,
        'message' => 'success',
@@ -53,7 +53,8 @@ function respFail($message, $data=[], $code=0) {
 }
 
 
-function hashMake($password) {
+function hashMake($password): string
+{
     return password_hash($password, PASSWORD_BCRYPT, [
         'cost' => 12
     ]);

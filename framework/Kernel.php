@@ -17,6 +17,10 @@ class Kernel
         $this->routeProvider();
     }
 
+    /**
+     * @throws \ErrorException
+     * @throws \Exception
+     */
     protected function registerExceptionHandler(): void {
         set_error_handler(function ($errno, $errStr, $errFile, $errLine) {
             if (!(error_reporting() & $errno)) {
@@ -27,13 +31,13 @@ class Kernel
             throw new \ErrorException($errStr, $errno, 1, $errFile, $errLine);
         });
 
-        // set_exception_handler(function (Throwable $exp) {
-        //     file_put_contents(
-        //         __DIR__ . '/../Storage/error.log',
-        //         sprintf("%s: %s\n", date('Y-m-d H:i:s'), $exp->__toString()),
-        //         FILE_APPEND
-        //     );
-        // });
+        if (Application::getInstance()->container()->has('http.exception')) {
+            $handler = Application::getInstance()->container()->get('http.exception');
+            set_exception_handler(function (\Throwable $exp) use ($handler) {
+                $handler->handle($exp);
+            });
+        }
+
     }
 
     protected function routeDispatch($action): \Closure

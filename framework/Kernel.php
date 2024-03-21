@@ -43,12 +43,12 @@ class Kernel
     protected function routeDispatch($action): \Closure
     {
         return function ($req) use ($action) : Response {
-
+            ob_start();
             $resp = $action($req);
 
             $echo = ob_get_contents();
             ob_end_clean();
-            if (is_string($resp)) {
+            if (is_string($resp) || is_null($resp)) {
                 return new Response(200, [], $echo . $resp);
             } else if ($resp instanceof Response) {
                 return new Response($resp->getStatusCode(), $resp->getHeaders(), $echo . $resp->rawBody());

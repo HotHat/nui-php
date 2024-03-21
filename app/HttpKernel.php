@@ -33,7 +33,7 @@ class HttpKernel extends Kernel
 
         set_exception_handler(function (Throwable $exp) {
             file_put_contents(
-                __DIR__ . '/../Storage/error.log',
+                __DIR__ . '/../storage/error.log',
                 sprintf("%s: %s\n", date('Y-m-d H:i:s'), $exp->__toString()),
                 FILE_APPEND
             );

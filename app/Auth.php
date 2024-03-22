@@ -2,6 +2,8 @@
 
 namespace App;
 
+use app\Repository\UserRepository;
+use Niu\Exception\AuthenticationException;
 use Niu\InstanceTrait;
 
 class Auth
@@ -13,6 +15,9 @@ class Auth
     }
 
     public function loginById($id) {
+        // fetch user from db by $id
+        $user = UserRepository::instance()->findById($id);
+        throw_if(empty($user), AuthenticationException::class);
         $this->loginUser = $id;
     }
 

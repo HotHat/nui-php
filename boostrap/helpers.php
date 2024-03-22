@@ -20,7 +20,13 @@ function dump($var): void {
 }
 
 function config($cfg) {
-    return Config::load($cfg);
+    $sp = explode('.', $cfg);
+    $file = array_shift($sp);
+    $next = Config::load($file);
+    foreach ($sp as $it) {
+        $next = $next[$it] ?? null;
+    }
+    return $next;
 }
 
 #[NoReturn]

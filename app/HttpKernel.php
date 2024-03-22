@@ -27,33 +27,4 @@ class HttpKernel extends Kernel
 
     ];
 
-    protected function registerExceptionHandler(): void
-    {
-        parent::registerExceptionHandler();
-
-        set_exception_handler(function (Throwable $exp) {
-            file_put_contents(
-                __DIR__ . '/../storage/error.log',
-                sprintf("%s: %s\n", date('Y-m-d H:i:s'), $exp->__toString()),
-                FILE_APPEND
-            );
-        });
-    }
-
-    public function routeProvider(): void
-    {
-        $router = new Router();
-        $router->post('/admin/login', [LoginController::class, 'login']);
-
-        $router->group([
-            'middleware' => ['admin'],
-            'prefix' => '/admin'
-        ], function ($router) {
-            $router->get('/dashboard', [DashboardController::class, 'dashboard']);
-            $router->get('/user', [UserController::class, 'index']);
-            $router->post('/logout', [LoginController::class, 'logout']);
-        });
-        $this->routes = $router->getRoutes();
-    }
-
 }

@@ -12,9 +12,12 @@ class Application
     {
         $this->root = $root;
         $this->container = new Container();
-
+        // first of all
         $this->bindBasePath();
+        //
+        Config::setApplication($this);
 
+        $this->registerProvider();
         self::$instance = $this;
     }
 
@@ -40,4 +43,13 @@ class Application
         $this->container['path.config'] = $this->root . '/config';
     }
 
+    public function registerProvider(): void
+    {
+        $providers = config('app.providers');
+
+        foreach ($providers as $provider) {
+            $instance = new $provider();
+            $instance->register($this->container);
+        }
+    }
 }

@@ -5,8 +5,14 @@ namespace Niu;
 class Config
 {
     private static array $config = [];
+    private static Application $appliacton;
+    public static function setApplication($app): void
+    {
+        self::$appliacton = $app;
+    }
+
     public static function load($file) {
-        $base = Application::getInstance()->container()->get('path.config');
+        $base = self::$appliacton->container()->get('path.config');
         $path = $base . '/' . $file . '.php';
 
         if (!file_exists($path)) {

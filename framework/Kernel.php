@@ -67,35 +67,49 @@ class Kernel
         }, $this->routeDispatch($action));
     }
 
-    protected function makeAction($callArray): \Closure
+    protected function makeAction($callArray, $params): \Closure
     {
         [$class, $method] = $callArray;
-        return function ($request) use ($class, $method) {
+        return function ($request) use ($class, $method, $params) {
             $instance = new $class;
-            return $instance->{$method}($request);
+            return $instance->{$method}($request, ...$params);
         };
     }
 
-    protected function routeGroup($middleware, $routes): array {
-        return array_map(function ($key, $action) use ($middleware) {
-            return [
-                'middleware' => $middleware,
-                'uri' => $key,
-                'action' => $this->makeAction($action)
-            ];
-        }, array_keys($routes), $routes);
-    }
-    public function routeProvider() {
 
+    public function routeProvider() {
+        $router = Application::getInstance()->container()->get('app.route');
+        if ($router) {
+            $this->routes = $router->getRoutes();
+        }
+    }
+
+    private function getUrlPattern($urlPattern) {
+        preg_match_all('/:\w+/', $urlPattern, $match);
+        if ($match) {
+            $pattern = array_map(function ($it) {return '/' . $it . '/';}, $match[0]);
+            $replace = array_map(function ($it) {return '(\w+)';}, $match[0]);
+            $pregUrl = preg_replace($pattern, $replace, $urlPattern);
+            $pt = '/^' . str_replace('/', '\\/', $pregUrl) . '$/';
+            return $pt;
+        } else {
+            return $urlPattern;
+        }
     }
 
     public function handle(Request $request): Response | string {
         $uri = $request->getUri();
         $matchGroup = [];
         foreach ($this->routes as $route) {
-            if ($uri === $route['uri']) {
+            $pattern = $this->getUrlPattern($route['uri']);
+
+            preg_match($pattern, $uri, $match);
+            if ($match) {
+                array_shift($match);
+                $route['bind_params'] = $match;
                 $matchGroup[] = $route;
             }
+            unset($match);
         }
 
         if (!$matchGroup) {
@@ -128,7 +142,7 @@ class Kernel
             }
         }
 
-        $action = $this->makeAction($match['action']);
+        $action = $this->makeAction($match['action'], $match['bind_params']);
         $dispatch = $this->pipe($action, array_reverse($mds));
 
         return $dispatch($request);

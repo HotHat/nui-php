@@ -14,23 +14,28 @@ class Request
         return $_SERVER['REQUEST_METHOD'];
     }
 
-    public function get($key=null) {
+    public function get($key=null, $default=null) {
         if ($key) {
-            return $_GET[$key] ?? '';
+            return $_GET[$key] ?? $default;
         }
         return $_GET;
     }
 
-    public function post($key=null) {
-        if ($key) {
-            return $_POST[$key] ?? '';
+    public function post($key=null, $default=null) {
+        if ($this->header('content_type') == 'application/json') {
+            $data = json_decode(file_get_contents('php://input'),true);
+        } else {
+            $data = $_POST;
         }
-        return $_POST;
+        if ($key) {
+            return $data[$key] ?? $default;
+        }
+        return $data;
     }
 
     public function header($key, $default='') {
         $exist = $_SERVER[strtoupper('http_'. $key)] ?? null;
-        return $exist ?? $default;
+        return $exist ?? $_SERVER[strtoupper($key)] ?? $default;
     }
 
     public function bearerToken(): string {

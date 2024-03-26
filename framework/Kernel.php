@@ -91,19 +91,26 @@ class Kernel
 
     public function handle(Request $request): Response | string {
         $uri = $request->getUri();
-        $match = null;
+        $matchGroup = [];
         foreach ($this->routes as $route) {
             if ($uri === $route['uri']) {
-                $match = $route;
+                $matchGroup[] = $route;
+            }
+        }
+
+        if (!$matchGroup) {
+            return new Response(404);
+        }
+
+        $match = null;
+        $method = $request->getMethod();
+        foreach ($matchGroup as $it) {
+            if ($method == $it['method']) {
+                $match = $it;
             }
         }
 
         if (!$match) {
-            return new Response(404);
-        }
-
-        $method = $request->getMethod();
-        if ($method !== $match['method']) {
             return new Response(400, [], 'request method not support!');
         }
 

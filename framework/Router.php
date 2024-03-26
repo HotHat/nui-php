@@ -18,6 +18,16 @@ class Router
         $this->makeRoute('POST', $uri, $action);
         return $this;
     }
+    public function patch($uri, $action): static
+    {
+        $this->makeRoute('PATCH', $uri, $action);
+        return $this;
+    }
+    public function delete($uri, $action): static
+    {
+        $this->makeRoute('DELETE', $uri, $action);
+        return $this;
+    }
 
     protected function makeRoute($method, $uri, $action) {
         $pfx = implode('/', $this->prefixStack);

@@ -9,8 +9,8 @@ $app = new Application(realpath(__DIR__ . '/..'));
 
 $contain = $app->container();
 
-$contain['http.kernel'] = function() {
-    return new HttpKernel();
+$contain['http.kernel'] = function() use ($app) {
+    return new HttpKernel($app);
 };
 
 $contain['http.exception'] = function() {

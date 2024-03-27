@@ -6,7 +6,7 @@ class Application
 {
     private static $instance;
     private string $root;
-    private $container;
+    private Container $container;
 
     public function __construct($root)
     {
@@ -19,9 +19,9 @@ class Application
         // first of all
         $this->bindBasePath();
         //
-        Config::setApplication($this);
+        // Config::setApplication($this);
 
-        $this->registerProvider();
+        // $this->registerProvider();
 
         self::$instance = $this;
     }
@@ -32,6 +32,14 @@ class Application
             throw new \Exception('need initialize Application::class first');
         }
         return self::$instance;
+    }
+
+    public function singleton($abstract, \Closure $create) {
+        $this->container->offsetSet($abstract, $this->container->factory($create));
+    }
+
+    public function bind($abstract, $create) {
+        $this->container->offsetSet($abstract, $create);
     }
 
     public function container(): Container
@@ -49,15 +57,7 @@ class Application
         $this->container['path.config'] = $this->root . '/config';
     }
 
-    public function registerProvider(): void
-    {
-        $providers = config('app.providers');
 
-        foreach ($providers as $provider) {
-            $instance = new $provider();
-            $instance->register($this->container);
-        }
-    }
 
     protected function loadFiles() {
         $files = [

@@ -3,149 +3,52 @@ namespace Niu;
 
 class Kernel
 {
+    protected $app;
     protected array $middleware = [];
     protected array $middlewareGroup = [];
     protected array $routeMiddleware = [];
 
-    protected array $routes = [];
+    protected $bootstrappers = [
+        \Niu\Bootstrap\HandleExceptions::class,
+        \Niu\Bootstrap\RegisterFacades::class,
+        \Niu\Bootstrap\RegisterProviders::class,
+        \Niu\Bootstrap\BootProviders::class,
+    ];
 
-    public function __construct()
+    public function __construct(Application $app)
     {
-        $this->registerExceptionHandler();
-
-        //
-        $this->routeProvider();
+        $this->app = $app;
     }
 
-    /**
-     * @throws \ErrorException
-     * @throws \Exception
-     */
-    protected function registerExceptionHandler(): void {
-        set_error_handler(function ($errno, $errStr, $errFile, $errLine) {
-            if (!(error_reporting() & $errno)) {
-                return false;
-            }
-            $errStr = htmlspecialchars($errStr);
-
-            throw new \ErrorException($errStr, $errno, 1, $errFile, $errLine);
-        });
-
-        if (Application::getInstance()->container()->has('http.exception')) {
-            $handler = Application::getInstance()->container()->get('http.exception');
-            set_exception_handler(function (\Throwable $exp) use ($handler) {
-                $handler->handle($exp);
-            });
+    public function bootstrap() {
+        foreach ($this->bootstrappers as $bootstrap) {
+            $instance = new $bootstrap;
+            $instance->bootstrap($this->app->container());
         }
-
     }
 
-    protected function routeDispatch($action): \Closure
+    protected function sendRequestThroughRouter($request)
     {
-        return function ($req) use ($action) : Response {
+        $this->app->bind('request', $request);
 
-            ob_start();
-            $resp = $action($req);
+        // Facade::clearResolvedInstance('request');
 
-            $echo = ob_get_contents();
-            ob_end_clean();
-            if (is_string($resp) || is_null($resp)) {
-                return new Response(200, [], $echo . $resp);
-            } else if ($resp instanceof Response) {
-                return new Response($resp->getStatusCode(), $resp->getHeaders(), $echo . $resp->rawBody());
-            }
+        $this->bootstrap();
 
-            return new Response(200, $resp->getHeaders(), $echo);
-        };
+        return (new Pipeline($this->app->container()))
+            ->send($request)
+            ->through($this->app->shouldSkipMiddleware() ? [] :
+                [
+                    'must' => $this->middleware,
+                    'group' => $this->middlewareGroup,
+                    'route' => $this->routeMiddleware
+                ]
+            )
+            ->then();
     }
 
-    protected function pipe($action, $middlewares) {
-        return array_reduce($middlewares, function($carry, $middleware) {
-            $next = new $middleware();
-            return function($req) use ($carry, $next) {
-                return $next->handle($req, $carry);
-            };
-        }, $this->routeDispatch($action));
-    }
-
-    protected function makeAction($callArray, $params): \Closure
-    {
-        [$class, $method] = $callArray;
-        return function ($request) use ($class, $method, $params) {
-            $instance = new $class;
-            return $instance->{$method}($request, ...$params);
-        };
-    }
-
-    public function routeProvider(): void
-    {
-        $router = Application::getInstance()->container()->get('app.route');
-        if ($router) {
-            $this->routes = $router->getRoutes();
-        }
-    }
-
-    private function getUrlPattern($urlPattern) {
-        preg_match_all('/:\w+/', $urlPattern, $match);
-        if ($match) {
-            $pattern = array_map(function ($it) {return '/' . $it . '/';}, $match[0]);
-            $replace = array_map(function ($it) {return '(\w+)';}, $match[0]);
-            $pregUrl = preg_replace($pattern, $replace, $urlPattern);
-            $pt = '/^' . str_replace('/', '\\/', $pregUrl) . '$/';
-            return $pt;
-        } else {
-            return $urlPattern;
-        }
-    }
-    public function handle(Request $request): Response | string {
-        $uri = $request->getUri();
-        $matchGroup = [];
-        foreach ($this->routes as $route) {
-            $pattern = $this->getUrlPattern($route['uri']);
-
-            preg_match($pattern, $uri, $match);
-            if ($match) {
-                array_shift($match);
-                $route['bind_params'] = $match;
-                $matchGroup[] = $route;
-            }
-            unset($match);
-        }
-
-        if (!$matchGroup) {
-            return new Response(404);
-        }
-
-        $match = null;
-        $method = $request->getMethod();
-        foreach ($matchGroup as $it) {
-            if ($method == $it['method']) {
-                $match = $it;
-            }
-        }
-
-        if (!$match) {
-            return new Response(400, [], 'request method not support!');
-        }
-
-        $mds = $this->middleware;
-
-        foreach ($match['middleware'] as $md) {
-            $g = $this->middlewareGroup[$md] ?? null;
-            if ($g) {
-                $mds = array_merge($mds, $g);
-            } else {
-                $g = $this->middleware[$md] ?? null;
-                if ($g) {
-                    $mds[] = $g;
-                }
-            }
-        }
-
-        $action = $this->makeAction($match['action'], $match['bind_params']);
-        $dispatch = $this->pipe($action, array_reverse($mds));
-
-        return $dispatch($request);
+    public function handle($request) {
+        return $this->sendRequestThroughRouter($request);
     }
 
 }

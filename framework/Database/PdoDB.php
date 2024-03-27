@@ -5,6 +5,7 @@ namespace Niu\Database;
 use PDO;
 
 class PdoDB {
+    private PDO $db;
     public function __construct($driver, $dbname, $host, $user, $password)
     {
         $this->db = new PDO(
@@ -18,11 +19,14 @@ class PdoDB {
     }
 
 
-    public function query($sql, $bind = [], $onlyOne=false) {
-        $data = [];
+    public function select($sql, $bind = [], $onlyOne=false) {
         $stmt = $this->db->prepare($sql);
         foreach ($bind as $key => $value) {
-            $stmt->bindValue($key+1, $value);
+            if (is_int($value)) {
+                $stmt->bindValue($key+1, $value, PDO::PARAM_INT);
+            } else {
+                $stmt->bindValue($key+1, $value);
+            }
         }
 
         $stmt->execute();
@@ -31,20 +35,16 @@ class PdoDB {
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
-        while ($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-
-        return $data;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function fetchOne($sql, $bind = []) {
-        $data = $this->query($sql, $bind, true);
+        $data = $this->select($sql, $bind, true);
         if (empty($data)) { return null; }
         return $data;
     }
 
     public function fetchAll($sql, $bind = []) {
-        return $this->query($sql, $bind, false);
+        return $this->select($sql, $bind, false);
     }
 
     public function insert($sql, $bind) {
@@ -67,8 +67,25 @@ class PdoDB {
         return $stmt->rowCount();
     }
 
-    public function exec($sql): int {
-        return $this->db->exec($sql);
+    public function statement($sql, $bind=[]): bool {
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute($bind);
+    }
+
+    public function cursor($sql, $bind=[]) {
+        $stmt = $this->db->prepare($sql);
+        foreach ($bind as $key => $value) {
+            $stmt->bindValue($key+1, $value );
+        }
+        $stmt->execute();
+        while ($record = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            yield $record;
+        }
+    }
+
+    public function exec($sql, $bind=[]): bool {
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute($bind);
     }
 
     public function lastError(): string {

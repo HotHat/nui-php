@@ -43,6 +43,7 @@ class Kernel
     protected function routeDispatch($action): \Closure
     {
         return function ($req) use ($action) : Response {
+
             ob_start();
             $resp = $action($req);
 
@@ -76,8 +77,8 @@ class Kernel
         };
     }
 
-
-    public function routeProvider() {
+    public function routeProvider(): void
+    {
         $router = Application::getInstance()->container()->get('app.route');
         if ($router) {
             $this->routes = $router->getRoutes();
@@ -96,7 +97,6 @@ class Kernel
             return $urlPattern;
         }
     }
-
     public function handle(Request $request): Response | string {
         $uri = $request->getUri();
         $matchGroup = [];

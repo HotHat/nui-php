@@ -12,12 +12,17 @@ class Application
     {
         $this->root = $root;
         $this->container = new Container();
+
+        //
+        $this->loadFiles();
+
         // first of all
         $this->bindBasePath();
         //
         Config::setApplication($this);
 
         $this->registerProvider();
+
         self::$instance = $this;
     }
 
@@ -39,6 +44,7 @@ class Application
     }
 
     public function bindBasePath(): void {
+        $this->container['path.base'] = $this->root;
         $this->container['path.app'] = $this->root . '/app';
         $this->container['path.config'] = $this->root . '/config';
     }
@@ -50,6 +56,15 @@ class Application
         foreach ($providers as $provider) {
             $instance = new $provider();
             $instance->register($this->container);
+        }
+    }
+
+    protected function loadFiles() {
+        $files = [
+            '/Support/helpers.php',
+        ];
+        foreach ($files as $file) {
+            require __DIR__ . $file;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Niu;
 
 class Application
 {
-    private static $instance;
+    private static Application $instance;
     private string $root;
     private Container $container;
 
@@ -18,10 +18,8 @@ class Application
 
         // first of all
         $this->bindBasePath();
-        //
-        // Config::setApplication($this);
 
-        // $this->registerProvider();
+        $this->bindBase();
 
         self::$instance = $this;
     }
@@ -66,5 +64,19 @@ class Application
         foreach ($files as $file) {
             require __DIR__ . $file;
         }
+    }
+
+    protected function bindBase()
+    {
+        // Application
+        $this->singleton('app', function () {
+            return $this;
+        });
+
+        // router
+        $this->singleton('router', function () {
+            return new Router();
+        });
+
     }
 }

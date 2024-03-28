@@ -33,12 +33,12 @@ namespace Niu;
  */
 class Container implements \ArrayAccess
 {
-    private $values = [];
-    private $factories;
-    private $protected;
-    private $frozen = [];
-    private $raw = [];
-    private $keys = [];
+    private array $values = [];
+    private \SplObjectStorage $factories;
+    private \SplObjectStorage $protected;
+    private array $frozen = [];
+    private array $raw = [];
+    private array $keys = [];
 
     /**
      * Instantiates the container.
@@ -60,6 +60,26 @@ class Container implements \ArrayAccess
     public function get(string $id)
     {
         return $this->offsetGet($id);
+    }
+
+    public function make(string $id)
+    {
+        return $this->offsetGet($id);
+    }
+    /**
+     * @throws \Exception
+     */
+    public function singleton($abstract, \Closure $create): void
+    {
+        $this->offsetSet($abstract, $this->factory($create));
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function bind($abstract, $create): void
+    {
+        $this->offsetSet($abstract, $create);
     }
 
     public function has(string $id): bool

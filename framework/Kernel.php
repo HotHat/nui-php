@@ -8,7 +8,7 @@ class Kernel
     protected array $middlewareGroup = [];
     protected array $routeMiddleware = [];
 
-    protected $bootstrappers = [
+    protected array $bootstraps = [
         \Niu\Bootstrap\HandleExceptions::class,
         \Niu\Bootstrap\RegisterFacades::class,
         \Niu\Bootstrap\RegisterProviders::class,
@@ -20,8 +20,9 @@ class Kernel
         $this->app = $app;
     }
 
-    public function bootstrap() {
-        foreach ($this->bootstrappers as $bootstrap) {
+    public function bootstrap(): void
+    {
+        foreach ($this->bootstraps as $bootstrap) {
             $instance = new $bootstrap;
             $instance->bootstrap($this->app->container());
         }

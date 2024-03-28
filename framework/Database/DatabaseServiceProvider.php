@@ -14,9 +14,9 @@ class DatabaseServiceProvider
      *
      * @return void
      */
-    public function register($container)
+    public function register($container): void
     {
-        $container['db.connection'] = function ($app) {
+        $container['db.connection'] = function () {
             $cfg = config('database');
             $pdo = new PDO(
                 sprintf('%s:dbname=%s;host=%s',
@@ -34,15 +34,6 @@ class DatabaseServiceProvider
                 $cfg['database'],
                 $cfg['prefix'],
                 []
-            );
-        };
-
-        $container['db.builder'] = function () use ($container) {
-            $connection = $container['db.connection'];
-            $grammar = new MySqlGrammar();
-            return new Builder(
-                $connection,
-                $grammar
             );
         };
     }

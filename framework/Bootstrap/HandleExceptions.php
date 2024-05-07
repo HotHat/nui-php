@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Bootstrap;
+namespace Nui\Bootstrap;
 
 class HandleExceptions
 {

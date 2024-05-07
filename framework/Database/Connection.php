@@ -1,21 +1,21 @@
 <?php
 
-namespace Niu\Database;
+namespace Nui\Database;
 
-use Niu\Database\Query\Grammar;
-use Niu\Support\Str;
+use Nui\Database\Query\Grammar;
+use Nui\Support\Str;
 use PDO;
 use Closure;
 use Exception;
 use PDOStatement;
 use LogicException;
 use DateTimeInterface;
-use Niu\Support\Arr;
-use Niu\Database\Query\Expression;
-// use Niu\Contracts\Events\Dispatcher;
-// use Niu\Database\Events\QueryExecuted;
+use Nui\Support\Arr;
+use Nui\Database\Query\Expression;
+// use Nui\Contracts\Events\Dispatcher;
+// use Nui\Database\Events\QueryExecuted;
 // use Doctrine\DBAL\Connection as DoctrineConnection;
-use Niu\Database\Query\Builder as QueryBuilder;
+use Nui\Database\Query\Builder as QueryBuilder;
 
 class Connection
 {
@@ -71,21 +71,21 @@ class Connection
     /**
      * The schema grammar implementation.
      *
-     * @var \Niu\Database\Schema\grammars\Grammar
+     * @var \Nui\Database\Schema\grammars\Grammar
      */
     protected $schemaGrammar;
 
     /**
      * The query post processor implementation.
      *
-     * @var \Niu\Database\Query\Processors\Processor
+     * @var \Nui\Database\Query\Processors\Processor
      */
     protected $postProcessor;
 
     /**
      * The event dispatcher instance.
      *
-     * @var \Niu\Contracts\Events\Dispatcher
+     * @var \Nui\Contracts\Events\Dispatcher
      */
     protected $events;
 
@@ -201,7 +201,7 @@ class Connection
     /**
      * Get the default schema grammar instance.
      *
-     * @return \Niu\Database\Schema\Grammars\Grammar
+     * @return \Nui\Database\Schema\Grammars\Grammar
      */
     protected function getDefaultSchemaGrammar()
     {
@@ -232,7 +232,7 @@ class Connection
      * Begin a fluent query against a database table.
      *
      * @param  string  $table
-     * @return \Niu\Database\Query\Builder
+     * @return \Nui\Database\Query\Builder
      */
     public function table($table)
     {
@@ -242,7 +242,7 @@ class Connection
     /**
      * Get a new query builder instance.
      *
-     * @return \Niu\Database\Query\Builder
+     * @return \Nui\Database\Query\Builder
      */
     public function query()
     {
@@ -583,7 +583,7 @@ class Connection
      * @param  \Closure  $callback
      * @return mixed
      *
-     * @throws \Niu\Database\QueryException
+     * @throws \Nui\Database\QueryException
      */
     protected function run($query, $bindings, Closure $callback)
     {
@@ -620,7 +620,7 @@ class Connection
      * @param  \Closure  $callback
      * @return mixed
      *
-     * @throws \Niu\Database\QueryException
+     * @throws \Nui\Database\QueryException
      */
     protected function runQueryCallback($query, $bindings, Closure $callback)
     {
@@ -695,13 +695,13 @@ class Connection
     /**
      * Handle a query exception that occurred during query execution.
      *
-     * @param  \Niu\Database\QueryException  $e
+     * @param  \Nui\Database\QueryException  $e
      * @param  string    $query
      * @param  array     $bindings
      * @param  \Closure  $callback
      * @return mixed
      *
-     * @throws \Niu\Database\QueryException
+     * @throws \Nui\Database\QueryException
      */
     protected function tryAgainIfCausedByLostConnection(QueryException $e, $query, $bindings, Closure $callback)
     {
@@ -804,7 +804,7 @@ class Connection
      * Get a new raw query expression.
      *
      * @param  mixed  $value
-     * @return \Niu\Database\Query\Expression
+     * @return \Nui\Database\Query\Expression
      */
     public function raw($value)
     {
@@ -967,7 +967,7 @@ class Connection
     /**
      * Get the event dispatcher used by the connection.
      *
-     * @return \Niu\Contracts\Events\Dispatcher
+     * @return \Nui\Contracts\Events\Dispatcher
      */
     public function getEventDispatcher()
     {
@@ -977,7 +977,7 @@ class Connection
     /**
      * Set the event dispatcher instance on the connection.
      *
-     * @param  \Niu\Contracts\Events\Dispatcher  $events
+     * @param  \Nui\Contracts\Events\Dispatcher  $events
      * @return void
      */
     public function setEventDispatcher(Dispatcher $events)
@@ -1092,7 +1092,7 @@ class Connection
     /**
      * Set the table prefix and return the grammar.
      *
-     * @return \Niu\Database\Query\Grammar
+     * @return \Nui\Database\Query\Grammar
      */
     public function withTablePrefix(Grammar $grammar)
     {

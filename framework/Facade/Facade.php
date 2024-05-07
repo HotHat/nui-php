@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Facade;
+namespace Nui\Facade;
 
 use RuntimeException;
 
@@ -9,7 +9,7 @@ abstract class Facade
     /**
      * The application instance being facaded.
      *
-     * @var \Niu\Container
+     * @var \Nui\Container
      */
     protected static $container;
 
@@ -86,7 +86,7 @@ abstract class Facade
     /**
      * Get the application instance behind the facade.
      *
-     * @return \Niu\Contracts\Foundation\Application
+     * @return \Nui\Contracts\Foundation\Application
      */
     public static function getFacadeContainer()
     {
@@ -96,7 +96,7 @@ abstract class Facade
     /**
      * Set the application instance.
      *
-     * @param  \Niu\Container  $container
+     * @param  \Nui\Container  $container
      * @return void
      */
     public static function setFacadeContainer($container)

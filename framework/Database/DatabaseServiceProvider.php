@@ -1,9 +1,9 @@
 <?php
 
-namespace Niu\Database;
+namespace Nui\Database;
 
-use Niu\Database\Query\Builder;
-use Niu\Database\Query\MySqlGrammar;
+use Nui\Database\Query\Builder;
+use Nui\Database\Query\MySqlGrammar;
 use PDO;
 
 class DatabaseServiceProvider

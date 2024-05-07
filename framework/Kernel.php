@@ -1,5 +1,5 @@
 <?php
-namespace Niu;
+namespace Nui;
 
 class Kernel
 {
@@ -9,10 +9,10 @@ class Kernel
     protected array $routeMiddleware = [];
 
     protected array $bootstraps = [
-        \Niu\Bootstrap\HandleExceptions::class,
-        \Niu\Bootstrap\RegisterFacades::class,
-        \Niu\Bootstrap\RegisterProviders::class,
-        \Niu\Bootstrap\BootProviders::class,
+        \Nui\Bootstrap\HandleExceptions::class,
+        \Nui\Bootstrap\RegisterFacades::class,
+        \Nui\Bootstrap\RegisterProviders::class,
+        \Nui\Bootstrap\BootProviders::class,
     ];
 
     public function __construct(Application $app)

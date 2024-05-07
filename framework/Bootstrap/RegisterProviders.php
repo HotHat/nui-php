@@ -1,8 +1,8 @@
 <?php
 
-namespace Niu\Bootstrap;
+namespace Nui\Bootstrap;
 
-use Niu\Config;
+use Nui\Config;
 
 class RegisterProviders
 {

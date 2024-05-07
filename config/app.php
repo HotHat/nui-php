@@ -3,6 +3,6 @@
 return [
     'providers' => [
         \App\Provider\RouteServiceProvider::class,
-        \Niu\Database\DatabaseServiceProvider::class
+        \Nui\Database\DatabaseServiceProvider::class
     ],
 ];

@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Niu\Request;
+use Nui\Request;
 
 class SessionStart
 {

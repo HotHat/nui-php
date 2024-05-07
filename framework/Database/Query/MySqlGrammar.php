@@ -1,9 +1,9 @@
 <?php
 
-namespace Niu\Database\Query;
+namespace Nui\Database\Query;
 
-use Niu\Support\Arr;
-use Niu\Support\Str;
+use Nui\Support\Arr;
+use Nui\Support\Str;
 
 class MySqlGrammar extends Grammar
 {
@@ -29,7 +29,7 @@ class MySqlGrammar extends Grammar
     /**
      * Compile a select query into SQL.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @return string
      */
     public function compileSelect(Builder $query)
@@ -70,7 +70,7 @@ class MySqlGrammar extends Grammar
     /**
      * Compile the lock into SQL.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  bool|string  $value
      * @return string
      */
@@ -86,7 +86,7 @@ class MySqlGrammar extends Grammar
     /**
      * Compile an update statement into SQL.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $values
      * @return string
      */
@@ -153,7 +153,7 @@ class MySqlGrammar extends Grammar
      * Prepares a JSON column being updated using the JSON_SET function.
      *
      * @param  string  $key
-     * @param  \Niu\Database\Query\JsonExpression  $value
+     * @param  \Nui\Database\Query\JsonExpression  $value
      * @return string
      */
     protected function compileJsonUpdateColumn($key, JsonExpression $value)
@@ -189,7 +189,7 @@ class MySqlGrammar extends Grammar
     /**
      * Compile a delete statement into SQL.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @return string
      */
     public function compileDelete(Builder $query)
@@ -221,7 +221,7 @@ class MySqlGrammar extends Grammar
     /**
      * Compile a delete query that does not use joins.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  string  $table
      * @param  array  $where
      * @return string
@@ -247,7 +247,7 @@ class MySqlGrammar extends Grammar
     /**
      * Compile a delete query that uses joins.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  string  $table
      * @param  array  $where
      * @return string

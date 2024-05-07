@@ -6,7 +6,7 @@ use App\Auth;
 use Closure;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use Niu\Request;
+use Nui\Request;
 
 class Authenticate
 {

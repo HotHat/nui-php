@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Facade;
+namespace Nui\Facade;
 
 class App extends Facade
 {

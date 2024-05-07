@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-namespace Niu;
+namespace Nui;
 
 /**
  * Container main class.

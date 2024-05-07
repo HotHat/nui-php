@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use Niu\Facade\DB;
+use Nui\Facade\DB;
 
 // require  __DIR__ . "/../boostrap/autoload.php";
 // $app = require  __DIR__ . "/../boostrap/app.php";
@@ -26,7 +26,7 @@ $pdo = new PDO(
     $cfg['password'],
 );
 
-$connection = new \Niu\Database\MySqlConnection(
+$connection = new \Nui\Database\MySqlConnection(
     $pdo,
     $cfg['database'],
     '',

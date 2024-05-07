@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Database\Query;
+namespace Nui\Database\Query;
 
 use Closure;
 
@@ -23,14 +23,14 @@ class JoinClause extends Builder
     /**
      * The parent query builder instance.
      *
-     * @var \Niu\Database\Query\Builder
+     * @var \Nui\Database\Query\Builder
      */
     private $parentQuery;
 
     /**
      * Create a new join clause instance.
      *
-     * @param  \Niu\Database\Query\Builder $parentQuery
+     * @param  \Nui\Database\Query\Builder $parentQuery
      * @param  string  $type
      * @param  string  $table
      * @return void
@@ -81,7 +81,7 @@ class JoinClause extends Builder
      * @param  \Closure|string  $first
      * @param  string|null  $operator
      * @param  string|null  $second
-     * @return \Niu\Database\Query\JoinClause
+     * @return \Nui\Database\Query\JoinClause
      */
     public function orOn($first, $operator = null, $second = null)
     {
@@ -91,7 +91,7 @@ class JoinClause extends Builder
     /**
      * Get a new instance of the join clause builder.
      *
-     * @return \Niu\Database\Query\JoinClause
+     * @return \Nui\Database\Query\JoinClause
      */
     public function newQuery()
     {
@@ -101,7 +101,7 @@ class JoinClause extends Builder
     /**
      * Create a new query instance for sub-query.
      *
-     * @return \Niu\Database\Query\Builder
+     * @return \Nui\Database\Query\Builder
      */
     protected function forSubQuery()
     {

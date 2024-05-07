@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Facade;
+namespace Nui\Facade;
 
 /**
  * @method static string table(string $table)

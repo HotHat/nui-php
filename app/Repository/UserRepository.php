@@ -1,17 +1,22 @@
 <?php
 namespace app\Repository;
 
-use Niu\Database\DB;
+
+use Nui\Facade\DB;
 
 class UserRepository
 {
-    use \Niu\InstanceTrait;
+    use \Nui\InstanceTrait;
     public function findById($id) {
-        return DB::instance()->fetchOne('select * from user where id=?', [$id]);
+        $user = DB::table('user')->find($id);
+        return $user ? (array)$user : null;
+        // return DB::instance()->fetchOne('select * from user where id=?', [$id]);
     }
 
     public function findByName($username) {
-        return DB::instance()->fetchOne('select * from user where username=?', [$username]);
+        $user =  DB::table('user')->where('username', $username)->first();
+        return $user ? (array)$user : null;
+        // return DB::instance()->fetchOne('select * from user where username=?', [$username]);
     }
 
 }

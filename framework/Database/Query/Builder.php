@@ -1,10 +1,10 @@
 <?php
 
-namespace Niu\Database\Query;
+namespace Nui\Database\Query;
 
 use Closure;
-use Niu\Support\Str;
-use Niu\Support\Arr;
+use Nui\Support\Str;
+use Nui\Support\Arr;
 use RuntimeException;
 use BadMethodCallException;
 use InvalidArgumentException;
@@ -14,21 +14,21 @@ class Builder
      /**
      * The database connection instance.
      *
-     * @var \Niu\Database\ConnectionInterface
+     * @var \Nui\Database\ConnectionInterface
      */
     public $connection;
 
     /**
      * The database query grammar instance.
      *
-     * @var \Niu\Database\Query\Grammar
+     * @var \Nui\Database\Query\Grammar
      */
     public $grammar;
 
     /**
      * The database query post processor instance.
      *
-     * @var \Niu\Database\Query\Processor
+     * @var \Nui\Database\Query\Processor
      */
     public $processor;
 
@@ -182,9 +182,9 @@ class Builder
     /**
      * Create a new query builder instance.
      *
-     * @param  \Niu\Database\ConnectionInterface  $connection
-     * @param  \Niu\Database\Query\Grammar  $grammar
-     * @param  \Niu\Database\Query\Processor  $processor
+     * @param  \Nui\Database\ConnectionInterface  $connection
+     * @param  \Nui\Database\Query\Grammar  $grammar
+     * @param  \Nui\Database\Query\Processor  $processor
      * @return void
      */
     public function __construct($connection, Grammar $grammar = null )
@@ -212,7 +212,7 @@ class Builder
      *
      * @param  string  $expression
      * @param  array   $bindings
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function selectRaw($expression, array $bindings = [])
     {
@@ -228,9 +228,9 @@ class Builder
     /**
      * Add a subselect expression to the query.
      *
-     * @param  \Closure|\Niu\Database\Query\Builder|string $query
+     * @param  \Closure|\Nui\Database\Query\Builder|string $query
      * @param  string  $as
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      *
      * @throws \InvalidArgumentException
      */
@@ -362,7 +362,7 @@ class Builder
      * @param  string  $operator
      * @param  string  $second
      * @param  string  $type
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function joinWhere($table, $first, $operator, $second, $type = 'inner')
     {
@@ -376,7 +376,7 @@ class Builder
      * @param  string  $first
      * @param  string|null  $operator
      * @param  string|null  $second
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function leftJoin($table, $first, $operator = null, $second = null)
     {
@@ -390,7 +390,7 @@ class Builder
      * @param  string  $first
      * @param  string  $operator
      * @param  string  $second
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function leftJoinWhere($table, $first, $operator, $second)
     {
@@ -404,7 +404,7 @@ class Builder
      * @param  string  $first
      * @param  string|null  $operator
      * @param  string|null  $second
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function rightJoin($table, $first, $operator = null, $second = null)
     {
@@ -418,7 +418,7 @@ class Builder
      * @param  string  $first
      * @param  string  $operator
      * @param  string  $second
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function rightJoinWhere($table, $first, $operator, $second)
     {
@@ -432,7 +432,7 @@ class Builder
      * @param  string|null  $first
      * @param  string|null  $operator
      * @param  string|null  $second
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function crossJoin($table, $first = null, $operator = null, $second = null)
     {
@@ -612,7 +612,7 @@ class Builder
      * @param  string|array|\Closure  $column
      * @param  string|null  $operator
      * @param  mixed   $value
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhere($column, $operator = null, $value = null)
     {
@@ -630,7 +630,7 @@ class Builder
      * @param  string|null  $operator
      * @param  string|null  $second
      * @param  string|null  $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereColumn($first, $operator = null, $second = null, $boolean = 'and')
     {
@@ -666,7 +666,7 @@ class Builder
      * @param  string|array  $first
      * @param  string|null  $operator
      * @param  string|null  $second
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereColumn($first, $operator = null, $second = null)
     {
@@ -695,7 +695,7 @@ class Builder
      *
      * @param  string  $sql
      * @param  mixed   $bindings
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereRaw($sql, $bindings = [])
     {
@@ -761,7 +761,7 @@ class Builder
      *
      * @param  string  $column
      * @param  mixed   $values
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereIn($column, $values)
     {
@@ -774,7 +774,7 @@ class Builder
      * @param  string  $column
      * @param  mixed   $values
      * @param  string  $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereNotIn($column, $values, $boolean = 'and')
     {
@@ -786,7 +786,7 @@ class Builder
      *
      * @param  string  $column
      * @param  mixed   $values
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereNotIn($column, $values)
     {
@@ -822,7 +822,7 @@ class Builder
      * Add an external sub-select to the query.
      *
      * @param  string   $column
-     * @param  \Niu\Database\Query\Builder|static  $query
+     * @param  \Nui\Database\Query\Builder|static  $query
      * @param  string   $boolean
      * @param  bool     $not
      * @return $this
@@ -859,7 +859,7 @@ class Builder
      * Add an "or where null" clause to the query.
      *
      * @param  string  $column
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereNull($column)
     {
@@ -871,7 +871,7 @@ class Builder
      *
      * @param  string  $column
      * @param  string  $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereNotNull($column, $boolean = 'and')
     {
@@ -903,7 +903,7 @@ class Builder
      *
      * @param  string  $column
      * @param  array   $values
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereBetween($column, array $values)
     {
@@ -916,7 +916,7 @@ class Builder
      * @param  string  $column
      * @param  array   $values
      * @param  string  $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereNotBetween($column, array $values, $boolean = 'and')
     {
@@ -928,7 +928,7 @@ class Builder
      *
      * @param  string  $column
      * @param  array   $values
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereNotBetween($column, array $values)
     {
@@ -939,7 +939,7 @@ class Builder
      * Add an "or where not null" clause to the query.
      *
      * @param  string  $column
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereNotNull($column)
     {
@@ -953,7 +953,7 @@ class Builder
      * @param  string  $operator
      * @param  mixed  $value
      * @param  string  $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereDate($column, $operator, $value = null, $boolean = 'and')
     {
@@ -970,7 +970,7 @@ class Builder
      * @param  string  $column
      * @param  string  $operator
      * @param  string  $value
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereDate($column, $operator, $value)
     {
@@ -988,7 +988,7 @@ class Builder
      * @param  string   $operator
      * @param  int   $value
      * @param  string   $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereTime($column, $operator, $value, $boolean = 'and')
     {
@@ -1001,7 +1001,7 @@ class Builder
      * @param  string  $column
      * @param  string   $operator
      * @param  int   $value
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereTime($column, $operator, $value)
     {
@@ -1019,7 +1019,7 @@ class Builder
      * @param  string  $operator
      * @param  mixed  $value
      * @param  string  $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereDay($column, $operator, $value = null, $boolean = 'and')
     {
@@ -1037,7 +1037,7 @@ class Builder
      * @param  string  $operator
      * @param  mixed  $value
      * @param  string  $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereMonth($column, $operator, $value = null, $boolean = 'and')
     {
@@ -1055,7 +1055,7 @@ class Builder
      * @param  string  $operator
      * @param  mixed  $value
      * @param  string  $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereYear($column, $operator, $value = null, $boolean = 'and')
     {
@@ -1092,7 +1092,7 @@ class Builder
      *
      * @param  \Closure $callback
      * @param  string   $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereNested(Closure $callback, $boolean = 'and')
     {
@@ -1104,7 +1104,7 @@ class Builder
     /**
      * Create a new query instance for nested where condition.
      *
-     * @return \Niu\Database\Query\Builder
+     * @return \Nui\Database\Query\Builder
      */
     public function forNestedWhere()
     {
@@ -1114,7 +1114,7 @@ class Builder
     /**
      * Add another query builder as a nested where to the query builder.
      *
-     * @param  \Niu\Database\Query\Builder|static $query
+     * @param  \Nui\Database\Query\Builder|static $query
      * @param  string  $boolean
      * @return $this
      */
@@ -1183,7 +1183,7 @@ class Builder
      *
      * @param  \Closure $callback
      * @param  bool     $not
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereExists(Closure $callback, $not = false)
     {
@@ -1195,7 +1195,7 @@ class Builder
      *
      * @param  \Closure $callback
      * @param  string   $boolean
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function whereNotExists(Closure $callback, $boolean = 'and')
     {
@@ -1206,7 +1206,7 @@ class Builder
      * Add a where not exists clause to the query.
      *
      * @param  \Closure  $callback
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orWhereNotExists(Closure $callback)
     {
@@ -1216,7 +1216,7 @@ class Builder
     /**
      * Add an exists clause to the query.
      *
-     * @param  \Niu\Database\Query\Builder $query
+     * @param  \Nui\Database\Query\Builder $query
      * @param  string  $boolean
      * @param  bool  $not
      * @return $this
@@ -1354,7 +1354,7 @@ class Builder
      * @param  string  $column
      * @param  string|null  $operator
      * @param  string|null  $value
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orHaving($column, $operator = null, $value = null)
     {
@@ -1385,7 +1385,7 @@ class Builder
      *
      * @param  string  $sql
      * @param  array   $bindings
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function orHavingRaw($sql, array $bindings = [])
     {
@@ -1424,7 +1424,7 @@ class Builder
      * Add an "order by" clause for a timestamp to the query.
      *
      * @param  string  $column
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function latest($column = 'created_at')
     {
@@ -1435,7 +1435,7 @@ class Builder
      * Add an "order by" clause for a timestamp to the query.
      *
      * @param  string  $column
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function oldest($column = 'created_at')
     {
@@ -1475,7 +1475,7 @@ class Builder
      * Alias to set the "offset" value of the query.
      *
      * @param  int  $value
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function skip($value)
     {
@@ -1501,7 +1501,7 @@ class Builder
      * Alias to set the "limit" value of the query.
      *
      * @param  int  $value
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function take($value)
     {
@@ -1530,7 +1530,7 @@ class Builder
      *
      * @param  int  $page
      * @param  int  $perPage
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function forPage($page, $perPage = 15)
     {
@@ -1543,7 +1543,7 @@ class Builder
      * @param  int  $perPage
      * @param  int  $lastId
      * @param  string  $column
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function forPageAfterId($perPage = 15, $lastId = 0, $column = 'id')
     {
@@ -1575,9 +1575,9 @@ class Builder
     /**
      * Add a union statement to the query.
      *
-     * @param  \Niu\Database\Query\Builder|\Closure  $query
+     * @param  \Nui\Database\Query\Builder|\Closure  $query
      * @param  bool  $all
-     * @return \Niu\Database\Query\Builder|static
+     * @return \Nui\Database\Query\Builder|static
      */
     public function union($query, $all = false)
     {
@@ -1595,8 +1595,8 @@ class Builder
     /**
      * Add a union all statement to the query.
      *
-     * @param  \Niu\Database\Query\Builder|\Closure  $query
-     * @return \Niu\Database\Query\Builder|static
+     * @param  \Nui\Database\Query\Builder|\Closure  $query
+     * @return \Nui\Database\Query\Builder|static
      */
     public function unionAll($query)
     {
@@ -1623,7 +1623,7 @@ class Builder
     /**
      * Lock the selected rows in the table for updating.
      *
-     * @return \Niu\Database\Query\Builder
+     * @return \Nui\Database\Query\Builder
      */
     public function lockForUpdate()
     {
@@ -1633,7 +1633,7 @@ class Builder
     /**
      * Share lock the selected rows in the table.
      *
-     * @return \Niu\Database\Query\Builder
+     * @return \Nui\Database\Query\Builder
      */
     public function sharedLock()
     {
@@ -1679,7 +1679,7 @@ class Builder
      * Execute the query as a "select" statement.
      *
      * @param  array  $columns
-     * @return \Niu\Support\Collection
+     * @return \Nui\Support\Collection
      */
     public function get($columns = ['*'])
     {
@@ -1715,7 +1715,7 @@ class Builder
      * @param  array  $columns
      * @param  string  $pageName
      * @param  int|null  $page
-     * @return \Niu\Contracts\Pagination\LengthAwarePaginator
+     * @return \Nui\Contracts\Pagination\LengthAwarePaginator
      */
     public function paginate($perPage = 15, $columns = ['*'], $pageName = 'page', $page = null)
     {
@@ -1740,7 +1740,7 @@ class Builder
      * @param  array  $columns
      * @param  string  $pageName
      * @param  int|null  $page
-     * @return \Niu\Contracts\Pagination\Paginator
+     * @return \Nui\Contracts\Pagination\Paginator
      */
     public function simplePaginate($perPage = 15, $columns = ['*'], $pageName = 'page', $page = null)
     {
@@ -2267,7 +2267,7 @@ class Builder
     /**
      * Get a new instance of the query builder.
      *
-     * @return \Niu\Database\Query\Builder
+     * @return \Nui\Database\Query\Builder
      */
     public function newQuery()
     {
@@ -2277,7 +2277,7 @@ class Builder
     /**
      * Create a new query instance for a sub-query.
      *
-     * @return \Niu\Database\Query\Builder
+     * @return \Nui\Database\Query\Builder
      */
     protected function forSubQuery()
     {
@@ -2288,7 +2288,7 @@ class Builder
      * Create a raw database expression.
      *
      * @param  mixed  $value
-     * @return \Niu\Database\Query\Expression
+     * @return \Nui\Database\Query\Expression
      */
     public function raw($value)
     {
@@ -2362,7 +2362,7 @@ class Builder
     /**
      * Merge an array of bindings into our bindings.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @return $this
      */
     public function mergeBindings(self $query)
@@ -2388,7 +2388,7 @@ class Builder
     /**
      * Get the database connection instance.
      *
-     * @return \Niu\Database\ConnectionInterface
+     * @return \Nui\Database\ConnectionInterface
      */
     public function getConnection()
     {
@@ -2398,7 +2398,7 @@ class Builder
     /**
      * Get the database query processor instance.
      *
-     * @return \Niu\Database\Query\Processors\Processor
+     * @return \Nui\Database\Query\Processors\Processor
      */
     // public function getProcessor()
     // {
@@ -2408,7 +2408,7 @@ class Builder
     /**
      * Get the query grammar instance.
      *
-     * @return \Niu\Database\Query\Grammars\Grammar
+     * @return \Nui\Database\Query\Grammars\Grammar
      */
     public function getGrammar()
     {

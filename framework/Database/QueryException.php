@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Database;
+namespace Nui\Database;
 
 class QueryException extends \Exception
 {

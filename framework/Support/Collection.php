@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Support;
+namespace Nui\Support;
 
 use ReturnTypeWillChange;
 use stdClass;
@@ -384,7 +384,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     /**
      * Get all items except for those with the specified keys.
      *
-     * @param  \Niu\Support\Collection|mixed  $keys
+     * @param  \Nui\Support\Collection|mixed  $keys
      * @return static
      */
     public function except($keys)
@@ -1674,7 +1674,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     /**
      * Get a base Support collection instance from this collection.
      *
-     * @return \Niu\Support\Collection
+     * @return \Nui\Support\Collection
      */
     public function toBase()
     {

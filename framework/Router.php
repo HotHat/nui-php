@@ -1,5 +1,5 @@
 <?php
-namespace Niu;
+namespace Nui;
 
 class Router
 {

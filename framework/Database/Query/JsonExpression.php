@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Database\Query;
+namespace Nui\Database\Query;
 
 use InvalidArgumentException;
 

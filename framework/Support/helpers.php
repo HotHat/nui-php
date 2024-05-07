@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use Niu\Support\Collection;
+use Nui\Support\Collection;
 
 if (!function_exists('dump'))
 {

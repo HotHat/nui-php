@@ -3,8 +3,8 @@
 namespace App;
 
 use app\Repository\UserRepository;
-use Niu\Exception\AuthenticationException;
-use Niu\InstanceTrait;
+use Nui\Exception\AuthenticationException;
+use Nui\InstanceTrait;
 
 class Auth
 {

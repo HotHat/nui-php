@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Exception;
+namespace Nui\Exception;
 
 class AuthenticationException extends \Exception
 {

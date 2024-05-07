@@ -3,7 +3,7 @@
 namespace App\Http\Controller;
 
 use App\Auth;
-use Niu\Request;
+use Nui\Request;
 
 class DashboardController
 {

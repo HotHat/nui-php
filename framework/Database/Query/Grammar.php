@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Database\Query;
+namespace Nui\Database\Query;
 
 
 class Grammar
@@ -48,7 +48,7 @@ class Grammar
     /**
      * Wrap a table in keyword identifiers.
      *
-     * @param  \Niu\Database\Query\Expression|string  $table
+     * @param  \Nui\Database\Query\Expression|string  $table
      * @return string
      */
     public function wrapTable($table): string
@@ -63,7 +63,7 @@ class Grammar
     /**
      * Wrap a value in keyword identifiers.
      *
-     * @param  \Niu\Database\Query\Expression|string  $value
+     * @param  \Nui\Database\Query\Expression|string  $value
      * @param  bool    $prefixAlias
      * @return string
      */
@@ -189,7 +189,7 @@ class Grammar
     /**
      * Get the value of a raw expression.
      *
-     * @param  \Niu\Database\Query\Expression  $expression
+     * @param  \Nui\Database\Query\Expression  $expression
      * @return string
      */
     public function getValue($expression)
@@ -233,7 +233,7 @@ class Grammar
     /**
      * Compile a select query into SQL.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @return string
      */
     public function compileSelect(Builder $query)
@@ -262,7 +262,7 @@ class Grammar
     /**
      * Compile the components necessary for a select clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @return array
      */
     protected function compileComponents(Builder $query)
@@ -286,7 +286,7 @@ class Grammar
     /**
      * Compile an aggregated select clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $aggregate
      * @return string
      */
@@ -307,7 +307,7 @@ class Grammar
     /**
      * Compile the "select *" portion of the query.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $columns
      * @return string|null
      */
@@ -328,7 +328,7 @@ class Grammar
     /**
      * Compile the "from" portion of the query.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  string  $table
      * @return string
      */
@@ -340,7 +340,7 @@ class Grammar
     /**
      * Compile the "join" portions of the query.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $joins
      * @return string
      */
@@ -356,7 +356,7 @@ class Grammar
     /**
      * Compile the "where" portions of the query.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @return string
      */
     protected function compileWheres(Builder $query)
@@ -381,7 +381,7 @@ class Grammar
     /**
      * Get an array of all the where clauses for the query.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @return array
      */
     protected function compileWheresToArray($query)
@@ -394,7 +394,7 @@ class Grammar
     /**
      * Format the where clause statements into one string.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $sql
      * @return string
      */
@@ -408,7 +408,7 @@ class Grammar
     /**
      * Compile a raw where clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -420,7 +420,7 @@ class Grammar
     /**
      * Compile a basic where clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -434,7 +434,7 @@ class Grammar
     /**
      * Compile a "where in" clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -450,7 +450,7 @@ class Grammar
     /**
      * Compile a "where not in" clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -466,7 +466,7 @@ class Grammar
     /**
      * Compile a where in sub-select clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -478,7 +478,7 @@ class Grammar
     /**
      * Compile a where not in sub-select clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -490,7 +490,7 @@ class Grammar
     /**
      * Compile a "where null" clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -502,7 +502,7 @@ class Grammar
     /**
      * Compile a "where not null" clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -514,7 +514,7 @@ class Grammar
     /**
      * Compile a "between" where clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -528,7 +528,7 @@ class Grammar
     /**
      * Compile a "where date" clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -540,7 +540,7 @@ class Grammar
     /**
      * Compile a "where time" clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -564,7 +564,7 @@ class Grammar
     /**
      * Compile a "where month" clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -576,7 +576,7 @@ class Grammar
     /**
      * Compile a "where year" clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -589,7 +589,7 @@ class Grammar
      * Compile a date based where clause.
      *
      * @param  string  $type
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -603,7 +603,7 @@ class Grammar
     /**
      * Compile a where clause comparing two columns..
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */
@@ -615,7 +615,7 @@ class Grammar
     /**
      * Compile a nested where clause.
      *
-     * @param  \Niu\Database\Query\Builder  $query
+     * @param  \Nui\Database\Query\Builder  $query
      * @param  array  $where
      * @return string
      */

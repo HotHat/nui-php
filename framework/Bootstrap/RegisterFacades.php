@@ -1,11 +1,11 @@
 <?php
 
-namespace Niu\Bootstrap;
+namespace Nui\Bootstrap;
 
-use Niu\Facade\App;
-use Niu\Facade\DB;
-use Niu\Facade\Facade;
-use Niu\Facade\Route;
+use Nui\Facade\App;
+use Nui\Facade\DB;
+use Nui\Facade\Facade;
+use Nui\Facade\Route;
 
 class RegisterFacades
 {

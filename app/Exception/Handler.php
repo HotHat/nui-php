@@ -2,7 +2,7 @@
 
 namespace app\Exception;
 
-use Niu\Exception\AuthenticationException;
+use Nui\Exception\AuthenticationException;
 
 class Handler
 {

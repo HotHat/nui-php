@@ -1,5 +1,5 @@
 <?php
-namespace Niu\Database;
+namespace Nui\Database;
 
 class DB
 {

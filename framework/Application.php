@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu;
+namespace Nui;
 
 class Application
 {

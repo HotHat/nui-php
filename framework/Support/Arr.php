@@ -1,6 +1,6 @@
 <?php
 
-namespace Niu\Support;
+namespace Nui\Support;
 
 use ArrayAccess;
 use InvalidArgumentException;

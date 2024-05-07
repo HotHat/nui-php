@@ -2,10 +2,10 @@
 
 return [
     'driver' => 'mysql',
-    'host' => '127.0.0.1',
+    'host' => 'mysql',
     'port' => '3306',
-    'database' => 'test',
-    'username' => 'test',
+    'database' => 'xapp',
+    'username' => 'root',
     'password' => '123456',
     'prefix' => '',
 ];
